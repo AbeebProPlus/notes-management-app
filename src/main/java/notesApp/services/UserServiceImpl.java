@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService{
         UserLoginResponse userLoginResponse = new UserLoginResponse();
         User foundUser = userRepository.findByEmail(loginRequest.getEmail().toLowerCase());
         if (foundUser == null){
-            userLoginResponse.setStatusCode(401);
+            userLoginResponse.setStatusCode(400);
             userLoginResponse.setMessage("Authentication failed");
             throw new UserLoginException("User not found");
         }
@@ -84,18 +84,18 @@ public class UserServiceImpl implements UserService{
 
     private void authenticateUser(UserLoginRequest loginRequest, UserLoginResponse userLoginResponse, User foundUser) {
         if (confirmPassword(loginRequest.getPassword(), foundUser.getPassword())){
-            userLoginResponse.setStatusCode(201);
+            userLoginResponse.setStatusCode(200);
             userLoginResponse.setUserName(foundUser.getUserName());
             userLoginResponse.setMessage("You're logged in");
         }else {
-            userLoginResponse.setStatusCode(401);
+            userLoginResponse.setStatusCode(400);
             userLoginResponse.setMessage("Authentication failed");
             throw new UserLoginException("Incorrect password");
         }
     }
 
     private User buildUser(UserRegistrationRequest registrationRequest){
-       User savedUser = userRepository.findByUserName(registrationRequest.getUserName());
+        User savedUser = userRepository.findByUserName(registrationRequest.getUserName());
         User foundUser = userRepository.findByEmail(registrationRequest.getEmail().toLowerCase());
         if (savedUser != null && savedUser.equals(foundUser)) {
             throw new ExistingUserException("User already exists!");
@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService{
 
     private UserRegistrationResponse buildResponse(){
         UserRegistrationResponse registrationResponse = new UserRegistrationResponse();
-        registrationResponse.setStatusCode(201);
+        registrationResponse.setStatusCode(200);
         registrationResponse.setMessage("Registration successful.\nProceed to login page");
         return registrationResponse;
     }
