@@ -95,10 +95,12 @@ public class UserServiceImpl implements UserService{
     }
 
     private User buildUser(UserRegistrationRequest registrationRequest){
-        User savedUser = userRepository.findByUserName(registrationRequest.getUserName());
+       User savedUser = userRepository.findByUserName(registrationRequest.getUserName());
         User savedUser2 = userRepository.findByEmail(registrationRequest.getEmail().toLowerCase());
+        if (savedUser != null && savedUser.equals(savedUser2)) {
+            throw new ExistingUserException("User already exists!");
+        }
         if (savedUser != null) throw new ExistingUserException("User already exists!");
-        if (savedUser == savedUser2) throw new ExistingUserException("User already exists!");
         User user = new User();
         validateUserRegistrationDetails(registrationRequest);
         user.setUserName(registrationRequest.getUserName());
