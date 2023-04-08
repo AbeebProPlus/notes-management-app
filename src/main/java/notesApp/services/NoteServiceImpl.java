@@ -83,7 +83,7 @@ public class NoteServiceImpl implements NoteService{
     }
     private CreateNoteResponse buildNoteResponse(){
         CreateNoteResponse response = new CreateNoteResponse();
-        response.setStatusCode(201);
+        response.setStatusCode(200);
         response.setMessage("Note created successfully");
         response.setCreationDate(String.valueOf(LocalDate.now()));
         response.setCreationTime(String.valueOf(LocalTime.now()));
@@ -92,13 +92,13 @@ public class NoteServiceImpl implements NoteService{
 
     private DeleteNoteResponse buildDeleteNoteResponse(){
         DeleteNoteResponse deleteNoteResponse = new DeleteNoteResponse();
-        deleteNoteResponse.setStatusCode(201);
+        deleteNoteResponse.setStatusCode(200);
         deleteNoteResponse.setMessage("Note deleted succesfully");
         return deleteNoteResponse;
     }
     private EditNoteResponse buildEditNoteResponse(){
         EditNoteResponse editNoteResponse = new EditNoteResponse();
-        editNoteResponse.setStatusCode(201);
+        editNoteResponse.setStatusCode(200);
         editNoteResponse.setMessage("Note edited succcessfully");
         return editNoteResponse;
     }
