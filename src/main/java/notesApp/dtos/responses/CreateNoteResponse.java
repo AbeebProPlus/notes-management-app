@@ -10,4 +10,5 @@ public class CreateNoteResponse {
     private String message;
     private String creationDate;
     private String creationTime;
+    private Note note;
 }
