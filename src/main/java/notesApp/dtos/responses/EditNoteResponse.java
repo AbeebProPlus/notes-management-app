@@ -6,4 +6,5 @@ import lombok.Data;
 public class EditNoteResponse {
     private int statusCode;
     private String message;
+    private Note note;
 }
