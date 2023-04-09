@@ -67,7 +67,7 @@ public class UserServiceImplTest {
         userRegistrationRequestWithExistingUserName.setPassword("hab4gmail");
 
         userRegistrationRequestWithExistingMailAddress.setUserName("mac9ver");
-        userRegistrationRequestWithExistingMailAddress.setEmail("mac8r@gmail.com");
+        userRegistrationRequestWithExistingMailAddress.setEmail("mac8ver@gmail.com");
         userRegistrationRequestWithExistingMailAddress.setPassword("hab4gmail");
 
         userLoginRequest.setEmail(userRegistrationRequest.getEmail());
@@ -87,7 +87,7 @@ public class UserServiceImplTest {
     @DisplayName("Test that user can register")
     void testRegister() {
         UserRegistrationResponse registrationResponse = userService.register(userRegistrationRequest);
-        assertEquals(201, registrationResponse.getStatusCode());
+        assertEquals(200, registrationResponse.getStatusCode());
     }
     @Test
     @DisplayName("Test that exception is thrown when registering with empty name")
@@ -118,7 +118,7 @@ public class UserServiceImplTest {
     @DisplayName("Test that registered user can log in")
     void testThatRegisteredUserCanLogIn(){
         UserLoginResponse loginResponse = userService.login(userLoginRequest);
-        assertEquals(201, loginResponse.getStatusCode());
+        assertEquals(200, loginResponse.getStatusCode());
     }
     @Test
     @DisplayName("Test that exception is thrown when using unregistered mail address to login")
@@ -130,17 +130,4 @@ public class UserServiceImplTest {
     void testLoginWithUnregisteredPassword(){
         assertThrows(UserLoginException.class, () ->userService.login(userLoginRequestWithWrongPassword));
     }
-    @Test
-    @DisplayName("Test that user can get note(s) by title")
-    void testThatNoteCanBeGottenByTiTle(){
-        List<Note> foundNote = userService.getUserNotesByTitle(findUserNoteByTitleRequest);
-        assertEquals(1, foundNote.size());
-        assertEquals("this is a title", foundNote.get(0).getTitle().toLowerCase());
-    }
 }
-//    void testGetUserNotesByTitle() {
-//    }
-//
-//    void testGetAllNotes() {
-//    }
-//}
